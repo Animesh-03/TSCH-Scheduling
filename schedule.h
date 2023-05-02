@@ -59,8 +59,6 @@ void Schedule::CreateSchedule(std::vector<TransmissionNode*> paths)
         {
             bool scheduled = false;
 
-            // std::cout << "Scheduling " << "(" << path->transmission.first << "," << path->transmission.second << ")\n";
-
             for(int i = 0; i < nTimeSlots && !scheduled; i++)
             {
                 for(int j = 0; j < nChannels; j++)
@@ -68,10 +66,10 @@ void Schedule::CreateSchedule(std::vector<TransmissionNode*> paths)
                     // Cell is already occupied
                     if(occupied[j][i]) continue;
 
-                    // Cell adds clashes
+                    // Cell adds clashes so go to next time slot
                     if(check[j][i][path->transmission.first] || check[j][i][path->transmission.second])
                         break;
-
+                    // Check that the cel lis occupied
                     occupied[j][i] = true;
 
                     for(int l = 0; l < nChannels; l++)
